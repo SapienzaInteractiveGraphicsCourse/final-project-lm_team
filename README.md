@@ -23,7 +23,7 @@ https://sapienzainteractivegraphicscourse.github.io/final-project-lm_team/
 3D models https://sketchfab.com/
 
 REPORT📝
-https://github.com/SapienzaInteractiveGraphicsCourse/final-project-lm_team/blob/main/paper.pdf
+https://github.com/SapienzaInteractiveGraphicsCourse/final-project-lm_team/blob/main/Report%20IG%20-%20Lorenti%20Mezzanotte.pdf
 
 
 <h1 align="center">GAME INFORMATIONSℹ️</h1>
