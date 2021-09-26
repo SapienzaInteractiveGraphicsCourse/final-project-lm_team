@@ -18,7 +18,7 @@ class gameAdministrator {
 		this.setOptionsDefault = function() {
 			this.options = {
 				mouseSensibility : 1,
-				lifes: 10,
+				lives: 10,
 				enemyQuantity: 10,
 				time: 180,
 				viewfinder: true,
@@ -39,13 +39,13 @@ class gameAdministrator {
 	getOptions() {return this.options;}
 	getMouseSensibility() {return this.options.mouseSensibility;}
 	getEnemyQuantity() {return this.options.enemyQuantity;}
-	getLifes() {return this.options.lifes;}
+	getLives() {return this.options.lives;}
 	getTime() {return this.options.time;}
 	getViewfinder() {return this.options.viewfinder;}
 	getSpeedFactor() {return this.velocityFactor;}
 	
 	setOptions(options) {this.options = options;}
-	addLifes(quantity) {this.options.lifes += quantity;}
+	addLives(quantity) {this.options.lives += quantity;}
 	resetSpeedFactor(){this.velocityFactor = this.options.velocityFactorDefault;}
 	multiplySpeedFactor(val = 2) {this.velocityFactor = this.options.velocityFactorDefault*val;}
 	
@@ -87,7 +87,7 @@ class MenuEnvironment {
 		this.difficultyHard = document.getElementById("hardMode");
 		
 		this.sliderMouseSens = document.getElementById("sliderMouseSens");
-		this.sliderLifes = document.getElementById("sliderLifes");
+		this.sliderLives = document.getElementById("sliderLives");
 		this.sliderEnemy = document.getElementById("sliderEnemy");
 		this.sliderTime = document.getElementById("sliderTime");
 		
@@ -136,7 +136,7 @@ class MenuEnvironment {
 			this.updateAllOptions();
             var currentOptions = ADMINISTRATOR.getOptions();
             document.cookie = "options={mouseSensibility:"+currentOptions.mouseSensibility+
-				", lifes:"+currentOptions.lifes+
+				", lives:"+currentOptions.lives+
                 ", enemyQuantity:"+currentOptions.enemyQuantity+
                 ", time:"+currentOptions.time+
 				", viewfinder"+currentOptions.viewfinder+"};";
@@ -161,7 +161,7 @@ class MenuEnvironment {
 
             ADMINISTRATOR.setOptions({
                 mouseSensibility: parseFloat(data[0].split(":")[1]),
-                lifes: parseFloat(data[1].split(":")[1]),
+                lives: parseFloat(data[1].split(":")[1]),
                 enemyQuantity: parseFloat(data[2].split(":")[1]),
                 time: parseFloat(data[3].split(":")[1]),
 				viewfinder: (data[4].split(":")[1] === 'true'),
@@ -185,7 +185,7 @@ class MenuEnvironment {
 	updateAllSlider() {
 		var curOptions = ADMINISTRATOR.getOptions();
 		this.sliderMouseSens.value = curOptions.mouseSensibility;
-		this.sliderLifes.value = curOptions.lifes;
+		this.sliderLives.value = curOptions.lives;
 		this.sliderEnemy.value = curOptions.enemyQuantity;
 		this.sliderTime.value = curOptions.time;
 		this.viewfinderCkBox.checked = curOptions.viewfinder;
@@ -194,7 +194,7 @@ class MenuEnvironment {
 	updateAllOptions() {
 		ADMINISTRATOR.setOptions({
 			mouseSensibility: parseFloat(this.sliderMouseSens.value),
-			lifes: parseFloat(this.sliderLifes.value),
+			lives: parseFloat(this.sliderLives.value),
 			enemyQuantity: parseFloat(this.sliderEnemy.value),
 			time: parseFloat(this.sliderTime.value),
 			viewfinder: this.viewfinderCkBox.checked,
@@ -207,7 +207,7 @@ class MenuEnvironment {
 			case 0:		//easy
 				var options = {
 					mouseSensibility : 1,
-					lifes: 10,
+					lives: 10,
 					enemyQuantity: 10,
 					time: 180,
 					viewfinder: true,
@@ -219,7 +219,7 @@ class MenuEnvironment {
 			case 1:		//normal
 				var options = {
 					mouseSensibility : 1,
-					lifes: 5,
+					lives: 5,
 					enemyQuantity: 25,
 					time: 150,
 					viewfinder: true,
@@ -230,7 +230,7 @@ class MenuEnvironment {
 			case 2:		//hard
 				var options = {
 					mouseSensibility : 1,
-					lifes: 2,
+					lives: 2,
 					enemyQuantity: 50,
 					time: 120,
 					viewfinder: false,
@@ -247,15 +247,12 @@ class MenuEnvironment {
 		switch(ambientation){
 			case 0:		//easy
 				ADMINISTRATOR.location = ambientation;
-				console.log(ADMINISTRATOR.location);
 				break;
 			case 1:		//normal
 				ADMINISTRATOR.location = ambientation;
-				console.log(ADMINISTRATOR.location);
 				break;
 			case 2:		//hard
 				ADMINISTRATOR.location = ambientation;
-				console.log(ADMINISTRATOR.location);
 				break;
 		};
 		
@@ -475,11 +472,11 @@ class gameEnvironment {
 		this.load();
 		
 		this.scoreAdministrator = new ScoreAdministrator({
-			lifesTarget: document.getElementById("lifesSpanGame"),
+			livesTarget: document.getElementById("livesSpanGame"),
 			timeTarget: document.getElementById("timeSpanGame"),
 			enemyTarget: document.getElementById("enemySpanGame"),
 			ammoTarget: document.getElementById("ammoSpanGame"),
-			lifes: ADMINISTRATOR.getLifes(), numEnemy: ADMINISTRATOR.getEnemyQuantity(),
+			lives: ADMINISTRATOR.getLives(), numEnemy: ADMINISTRATOR.getEnemyQuantity(),
 			time: ADMINISTRATOR.getTime(),
 		})
 	}
@@ -565,7 +562,6 @@ class gameEnvironment {
 	changeVisual() {
 		if (this.activeCamera >=2) this.activeCamera = 0;
 		else this.activeCamera = this.activeCamera+1;
-		console.log(this.activeCamera);
 	}
 	
 	onWindowResize() {
@@ -714,7 +710,6 @@ class gameEnvironment {
 		
 		if(this.activeCamera==2){
 			this.renderer.render( this.scene, this.camera3 );
-			console.log("camera3");
 		}
 		this.time = Date.now();
 	}

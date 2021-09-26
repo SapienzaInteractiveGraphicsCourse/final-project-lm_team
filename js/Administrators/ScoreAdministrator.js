@@ -1,14 +1,14 @@
 export class ScoreAdministrator{
     constructor(params){
-        this.lifesSpanGame = params.lifesTarget;
+        this.livesSpanGame = params.livesTarget;
         this.timeSpanGame = params.timeTarget;
         this.enemySpanGame = params.enemyTarget;
 		this.ammoSpanGame = params.ammoTarget;
 
-        this.totalLifes = params.lifes;
+        this.totalLives = params.lives;
 		this.time = params.time;
 
-        this.currLifes = this.totalLifes;
+        this.currLives = this.totalLives;
 		
  
         this.startTime = 0;
@@ -44,7 +44,7 @@ export class ScoreAdministrator{
         return this.gameOver;
     }
     updateGameOver(){
-        if(this.currLifes <= 0 || this.currPassedTime < 0){
+        if(this.currLives <= 0 || this.currPassedTime < 0){
             this.gameOver = true;
 			var audio = new Audio('resources/audios/GameOver.wav');
 			audio.play();
@@ -72,13 +72,11 @@ export class ScoreAdministrator{
 	}
 
     lose1life(){
-		console.log("Colpito")
         var hitTime = Date.now();
 		if(this.lastHit && hitTime-this.lastHit < 650)
 			return;
-		console.log("Eseguo")
 		this.lastHit = hitTime;
-		this.currLifes -= 1;
+		this.currLives -= 1;
 		this.updateSpansGame();
 		this.updateGameOver();
     }
@@ -86,7 +84,7 @@ export class ScoreAdministrator{
 	recoverLife(time){
 		var startRecover = Date.now()
 		if(this.recoverFlag == 0){
-			this.currLifes += 5;
+			this.currLives += 5;
             document.getElementById("recover").style.visibility = "visible";
 			setTimeout(function(){
             document.getElementById("recover").style.visibility = "hidden";
@@ -122,7 +120,7 @@ export class ScoreAdministrator{
 	}
 
     updateSpansGame() {
-        this.lifesSpanGame.innerHTML = "Lifes: " + this.currLifes;
+        this.livesSpanGame.innerHTML = "Lives: " + this.currLives;
         this.timeSpanGame.innerHTML = "time: " + parseInt(this.currPassedTime / 60) + ":" + (this.currPassedTime % 60).toLocaleString('en-US',
             { minimumIntegerDigits: 2, useGrouping: false });
         this.enemySpanGame.innerHTML = "enemy: " + this.killedEnemy + "/" + this.quantityEnemy;

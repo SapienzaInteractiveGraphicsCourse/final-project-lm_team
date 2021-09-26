@@ -93,7 +93,6 @@ export class AIMonitor {
 		this.ammo = gun.ammo;
 		this.timeBetweenAmmo = gun.timeBetweenAmmo *1000;
 		this.currAmmo = this.ammo;
-		console.log()
 	}
 	
 	computeDirection() {
